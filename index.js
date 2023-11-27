@@ -14,6 +14,8 @@ app.use(express.urlencoded({
     extended: true
 }))
 
+app.use(express.json())
+
 //rotas
 app.post('/criar', (requisicao, resposta) => {
     const descricao = requisicao.body.descricao
@@ -21,7 +23,7 @@ app.post('/criar', (requisicao, resposta) => {
 
 
     const sql = `
-        INSERT INTO tarefas(descricao, completa)
+        INSERT INTO tarefas(descricao, completas)
         VALUES('${descricao}', '${completa}')
     `
 
@@ -37,6 +39,24 @@ app.post('/criar', (requisicao, resposta) => {
 
 
 app.get('/', (requisicao, resposta) => {
+    const sql = 'SELECT * FROM tarefas'
+
+    conexao.query(sql, (erro, dados) =>{
+        if (erro) {
+            return console.log(erro)
+        }
+
+        const tarefas = dados.map((dado) => {
+            return {
+                id: dado.id,
+                descricao: dado.descricao,
+                completa: dado.completa === 0 ? false : true
+            }
+        })
+
+        
+    })
+
     resposta.render("home")
 })
 
