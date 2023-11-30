@@ -130,6 +130,10 @@ main {
     border-top: 1px solid var(--border-color);
 }
 
+.completa label {
+    text-decoration: line-through;
+}
+
 .tarefa form {
     display: flex;
     justify-content: space-between;
