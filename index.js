@@ -40,7 +40,7 @@ app.post('/descompletar', (requisicao, resposta) => {
     const id = requisicao.body.id
 
     const sql = `
-        UPTADE tarefas
+        UPDATE tarefas
         SET completas = '0'
         WHERE id = ${id}
     `
@@ -87,11 +87,17 @@ app.get('/', (requisicao, resposta) => {
             return {
                 id: dado.id,
                 descricao: dado.descricao,
-                completa: dado.completa === 0 ? false : true
+                completas: dado.completas === 0 ? false : true
             }
         })
 
-        resposta.render('home', { tarefas })
+        const tarefasAtivas = tarefas.filter((tarefa) => {
+            return tarefa.completas === false && tarefa
+        })
+
+        const quantidadeTarefasAtivas = tarefasAtivas.length
+
+        resposta.render('home', { tarefas, quantidadeTarefasAtivas })
     })
 })
 

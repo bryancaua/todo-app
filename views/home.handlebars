@@ -1,7 +1,7 @@
 <main>
     <section class="tarefas">
        {{#each tarefas}}
-         <div class="tarefa">
+        <div class="tarefa">
             <form action="">
                 {{#if this.completas}}
                 <div class="completa">
@@ -22,7 +22,7 @@
         </div>
        {{/each}}
         <div class="informacoes">
-            <p>5 tarefas ativas</p>
+            <p>{{quantidadeTarefasAtivas}} tarefas Ativas</p>
 
             <div class="botoes">
                  <a href="" class="active">Todas</a>
