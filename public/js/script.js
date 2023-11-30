@@ -10,6 +10,17 @@ function completarTarefa(id) {
     window.location.reload()
 }
 
+
+function excluirTarefa(id) {
+    fetch("http://localhost:3000/excluir", {
+        method: "POST", 
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id })
+    })
+}
+
 function descompletarTarefa(id) {
     fetch("http://localhost:3000/descompletar", {
         method: "POST",
